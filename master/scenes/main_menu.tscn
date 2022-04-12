@@ -1,0 +1,77 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/theme/theme.tres" type="Theme" id=1]
+[ext_resource path="res://master/scripts/main_menu.gd" type="Script" id=2]
+[ext_resource path="res://assets/theme/VCR_OSD_MONO_1.001.ttf" type="DynamicFontData" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 48
+font_data = ExtResource( 4 )
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -132.0
+margin_top = 256.0
+margin_right = 134.0
+margin_bottom = 285.0
+rect_pivot_offset = Vector2( -216, 16 )
+custom_fonts/font = SubResource( 1 )
+text = "D4SH"
+align = 1
+
+[node name="Panel" type="Panel" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -62.5
+margin_top = -50.0
+margin_right = 62.5
+margin_bottom = 50.0
+theme = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="playButton" type="Button" parent="Panel" groups=["buttons"]]
+margin_left = 42.5
+margin_top = 14.0
+margin_right = 82.5
+margin_bottom = 33.0
+grow_horizontal = 2
+size_flags_horizontal = 0
+theme = ExtResource( 1 )
+shortcut_in_tooltip = false
+text = "Play"
+
+[node name="contButton" type="Button" parent="Panel" groups=["buttons"]]
+margin_left = 26.5
+margin_top = 42.0
+margin_right = 102.5
+margin_bottom = 61.0
+size_flags_horizontal = 0
+theme = ExtResource( 1 )
+shortcut_in_tooltip = false
+text = "Continue"
+
+[node name="quitButton" type="Button" parent="Panel" groups=["buttons"]]
+margin_left = 42.5
+margin_top = 70.0
+margin_right = 82.5
+margin_bottom = 90.0
+grow_horizontal = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+shortcut_in_tooltip = false
+text = "Quit"
+
+[connection signal="button_up" from="Panel/playButton" to="." method="_on_playButton_button_up"]
+[connection signal="button_up" from="Panel/contButton" to="." method="_on_contButton_button_up"]
+[connection signal="button_up" from="Panel/quitButton" to="." method="_on_quitButton_button_up"]

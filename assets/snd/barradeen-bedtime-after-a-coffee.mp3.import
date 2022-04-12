@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/barradeen-bedtime-after-a-coffee.mp3-195eab2101569f572bea4f0c121f57f9.mp3str"
+
+[deps]
+
+source_file="res://assets/snd/barradeen-bedtime-after-a-coffee.mp3"
+dest_files=[ "res://.import/barradeen-bedtime-after-a-coffee.mp3-195eab2101569f572bea4f0c121f57f9.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

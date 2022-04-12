@@ -13,4 +13,4 @@ Currently most nodes are for 3D, but more nodes for 2D, Particles and common tas
 
 ## Added Nodes:
 
-![image](addons/visual_shader_node_library/nodes.png "New Nodes")
+![iamge](nodes.png "New Nodes")

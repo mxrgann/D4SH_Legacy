@@ -1,0 +1,53 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://master/scripts/goal.gd" type="Script" id=1]
+[ext_resource path="res://shader.png" type="Texture" id=2]
+[ext_resource path="res://assets/shader/dissolve.tres" type="Shader" id=3]
+[ext_resource path="res://assets/snd/goal.wav" type="AudioStream" id=4]
+
+[sub_resource type="ShaderMaterial" id=11]
+shader = ExtResource( 3 )
+shader_param/degrees = 90.0
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 10, 11.25 )
+
+[sub_resource type="ParticlesMaterial" id=12]
+emission_shape = 1
+emission_sphere_radius = 10.0
+flag_disable_z = true
+direction = Vector3( 0, -10, 0 )
+gravity = Vector3( 0, 980, 0 )
+initial_velocity = 100.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 2.0
+
+[node name="goal" type="Node2D" groups=["goals"]]
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 11 )
+rotation = 3.14159
+scale = Vector2( 0.3, 0.7 )
+texture = ExtResource( 2 )
+
+[node name="Area2D" type="Area2D" parent="."]
+visible = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+scale = Vector2( 1, 2 )
+shape = SubResource( 3 )
+
+[node name="Particles2D" type="Particles2D" parent="."]
+emitting = false
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource( 12 )
+
+[node name="goalSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -5.0
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

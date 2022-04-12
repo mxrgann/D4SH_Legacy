@@ -1,6 +1,8 @@
-MIT License
+The base scene is from the Materials Testers Demo and is licensed under the MIT license:
+https://github.com/godotengine/godot-demo-projects/tree/3.1-342f27e/3d/material_testers
 
-Copyright (c) 2020 fenix-hub
+Material Examples by Jaccomo Lorenz (Maujoe)
+Copyright 2020 Jaccomo Lorenz (Maujoe)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

@@ -1,6 +1,10 @@
-MIT License
+Some shader code were adapted from godot's Spatial Material.
 
-Copyright (c) 2020 fenix-hub
+Textureless noise shaders adapted from Godot-3.0-Noise-Shaders
+Copyright (c) 2017 Curly Brace
+https://github.com/curly-brace/Godot-3.0-Noise-Shaders
+
+Copyright (c) 2020 Godot Devs/Contributors, Jaccomo Lorenz (Maujoe)/Community
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

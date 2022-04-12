@@ -1,0 +1,171 @@
+[gd_resource type="VisualShader" load_steps=18 format=2]
+
+[ext_resource path="res://assets/shader/noise.tres" type="Texture" id=1]
+[ext_resource path="res://assets/shader/gradient.tres" type="Texture" id=2]
+[ext_resource path="res://addons/visual_shader_node_library/shader_nodes/common/rotation_2d.gd" type="Script" id=3]
+
+[sub_resource type="VisualShaderNodeScalarOp" id=11]
+operator = 2
+
+[sub_resource type="VisualShaderNodeScalarFunc" id=14]
+default_input_values = [ 0, 90.0 ]
+function = 27
+
+[sub_resource type="VisualShaderNodeInput" id=15]
+input_name = "time"
+
+[sub_resource type="VisualShaderNodeVectorOp" id=16]
+operator = 2
+
+[sub_resource type="VisualShaderNodeVec3Constant" id=17]
+constant = Vector3( 0, -1, 0 )
+
+[sub_resource type="VisualShaderNodeTexture" id=4]
+texture = ExtResource( 2 )
+
+[sub_resource type="VisualShaderNodeVectorOp" id=18]
+
+[sub_resource type="VisualShaderNodeInput" id=5]
+output_port_for_preview = 0
+input_name = "uv"
+
+[sub_resource type="VisualShaderNodeInput" id=6]
+input_name = "uv"
+
+[sub_resource type="VisualShaderNodeTexture" id=7]
+output_port_for_preview = 0
+texture = ExtResource( 1 )
+
+[sub_resource type="VisualShaderNodeScalarOp" id=8]
+
+[sub_resource type="VisualShaderNodeScalarOp" id=9]
+default_input_values = [ 0, 0.0, 1, 0.4 ]
+operator = 9
+
+[sub_resource type="VisualShaderNodeCustom" id=12]
+output_port_for_preview = 0
+initialized = true
+script = ExtResource( 3 )
+
+[sub_resource type="VisualShaderNodeScalarUniform" id=13]
+uniform_name = "degrees"
+
+[resource]
+code = "shader_type canvas_item;
+uniform float degrees;
+uniform sampler2D tex_frg_2;
+uniform sampler2D tex_frg_5;
+
+
+// Rotation2D
+
+void rotation_2d(float angle, vec3 pivot, in vec3 position_in,  out vec3 position_out) {
+	mat2 rotation_matrix = mat2( vec2(cos(angle), -sin(angle)), vec2(sin(angle), cos(angle)));
+	position_in -= pivot;
+	position_out.xy = rotation_matrix * position_in.xy;
+	position_out.z = position_in.z;
+	position_out += pivot;
+	
+}
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// ScalarUniform:9
+	float n_out9p0 = degrees;
+
+// ScalarFunc:12
+	float n_out12p0 = radians(n_out9p0);
+
+// Input:3
+	vec3 n_out3p0 = vec3(UV, 0.0);
+
+// Rotation2D:8
+	vec3 n_out8p0;
+	{
+		rotation_2d(n_out12p0, vec3(0.0, 0.0, 0.0), n_out3p0, n_out8p0);
+	}
+
+// Texture:2
+	vec4 tex_frg_2_read = texture(tex_frg_2, n_out8p0.xy);
+	vec3 n_out2p0 = tex_frg_2_read.rgb;
+	float n_out2p1 = tex_frg_2_read.a;
+
+// Vector:19
+	vec3 n_out19p0 = vec3(0.000000, -1.000000, 0.000000);
+
+// Input:13
+	float n_out13p0 = TIME;
+
+// VectorOp:18
+	vec3 n_out18p0 = n_out19p0 * vec3(n_out13p0);
+
+// Input:4
+	vec3 n_out4p0 = vec3(UV, 0.0);
+
+// VectorOp:20
+	vec3 n_out20p0 = n_out18p0 + n_out4p0;
+
+// Texture:5
+	vec4 tex_frg_5_read = texture(tex_frg_5, n_out20p0.xy);
+	vec3 n_out5p0 = tex_frg_5_read.rgb;
+	float n_out5p1 = tex_frg_5_read.a;
+
+// ScalarOp:7
+	float n_in7p1 = 0.40000;
+	float n_out7p0 = step(dot(n_out5p0, vec3(0.333333, 0.333333, 0.333333)), n_in7p1);
+
+// ScalarOp:6
+	float n_out6p0 = n_out2p1 + n_out7p0;
+
+// ScalarOp:11
+	float n_out11p0 = n_out2p1 * n_out6p0;
+
+// Output:0
+	COLOR.rgb = n_out2p0;
+	COLOR.a = n_out11p0;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+graph_offset = Vector2( -442.738, -108.27 )
+mode = 1
+flags/light_only = false
+nodes/vertex/0/position = Vector2( -220, -1280 )
+nodes/fragment/0/position = Vector2( 1260, -80 )
+nodes/fragment/2/node = SubResource( 4 )
+nodes/fragment/2/position = Vector2( 460, -180 )
+nodes/fragment/3/node = SubResource( 5 )
+nodes/fragment/3/position = Vector2( -320, -280 )
+nodes/fragment/4/node = SubResource( 6 )
+nodes/fragment/4/position = Vector2( -680, 260 )
+nodes/fragment/5/node = SubResource( 7 )
+nodes/fragment/5/position = Vector2( 0, 200 )
+nodes/fragment/6/node = SubResource( 8 )
+nodes/fragment/6/position = Vector2( 460, 100 )
+nodes/fragment/7/node = SubResource( 9 )
+nodes/fragment/7/position = Vector2( 300, 200 )
+nodes/fragment/8/node = SubResource( 12 )
+nodes/fragment/8/position = Vector2( 80, -140 )
+nodes/fragment/9/node = SubResource( 13 )
+nodes/fragment/9/position = Vector2( -160, -320 )
+nodes/fragment/11/node = SubResource( 11 )
+nodes/fragment/11/position = Vector2( 680, 40 )
+nodes/fragment/12/node = SubResource( 14 )
+nodes/fragment/12/position = Vector2( 40, -320 )
+nodes/fragment/13/node = SubResource( 15 )
+nodes/fragment/13/position = Vector2( -680, 200 )
+nodes/fragment/18/node = SubResource( 16 )
+nodes/fragment/18/position = Vector2( -480, 80 )
+nodes/fragment/19/node = SubResource( 17 )
+nodes/fragment/19/position = Vector2( -860, 100 )
+nodes/fragment/20/node = SubResource( 18 )
+nodes/fragment/20/position = Vector2( -180, 300 )
+nodes/fragment/connections = PoolIntArray( 2, 1, 6, 0, 7, 0, 6, 1, 5, 0, 7, 0, 6, 0, 11, 1, 2, 1, 11, 0, 3, 0, 8, 2, 12, 0, 8, 0, 9, 0, 12, 0, 8, 0, 2, 0, 2, 0, 0, 0, 11, 0, 0, 1, 13, 0, 18, 1, 19, 0, 18, 0, 18, 0, 20, 0, 4, 0, 20, 1, 20, 0, 5, 0 )

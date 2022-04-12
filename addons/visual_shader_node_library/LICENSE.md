@@ -1,6 +1,6 @@
-MIT License
+Some shader code were adapted from godot's Spatial Material.
 
-Copyright (c) 2020 fenix-hub
+Copyright (c) 2020 Godot Devs/Contributors, Jaccomo Lorenz (Maujoe)/Community
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
