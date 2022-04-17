@@ -32,11 +32,7 @@ func _on_Area2D_body_entered(body):
 			if Global.currentLap != Global.maxLaps:
 				Global.currentLap += 1;
 			else:
-				if Global.currentLevel == 3:
-					get_tree().change_scene("res://master/scenes/main_menu.tscn");
-				else:
-					get_tree().change_scene("res://master/scenes/level_complete.tscn");
-					Global.currentLevel += 1;
+				Global.complete();
 		else:
 			Global.currentSequenceIndex += 1;
 		$goalSound.play();

@@ -83,3 +83,6 @@ volume_db = -5.0
 
 [node name="hurtSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
+
+[node name="dashTimer" type="Timer" parent="."]
+one_shot = true

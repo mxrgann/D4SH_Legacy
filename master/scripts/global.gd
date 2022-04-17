@@ -21,3 +21,11 @@ func reset(laps):
 func nextLevel():
 	refresh();
 	get_tree().change_scene("master/scenes/levels/level" + str(currentLevel) + ".tscn");
+
+func complete():
+	if Global.currentLevel == 3:
+		get_tree().change_scene("res://master/scenes/main_menu.tscn");
+	else:
+		get_tree().change_scene("res://master/scenes/level_complete.tscn");
+	Global.currentLevel += 1;
+	Save._save();

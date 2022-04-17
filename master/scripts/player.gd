@@ -2,14 +2,15 @@ extends KinematicBody2D
 
 const ACCELERATION = 1000;
 const MAX_SPEED = 500;
-const FRICTION = 0.25;
+const FRICTION = 0.15;
 const GRAVITY = 500;
 const JUMP_FORCE = 275;
 const DASH_FORCE = 300;
 
 onready var animPlayer = $AnimationPlayer;
 onready var jumpSound = $jumpSound;
-onready var hurtSound = $hurtSound
+onready var hurtSound = $hurtSound;
+onready var timer = $dashTimer;
 
 var motion = Vector2.ZERO;
 var fall_mult = 1;
@@ -36,9 +37,10 @@ func _physics_process(delta):
 			motion.y = -JUMP_FORCE;
 			jumpSound.play();
 	
-	if Input.is_action_just_pressed("dash"):
+	if Input.is_action_just_pressed("dash") && timer.is_stopped():
 		motion.x += x_vel * DASH_FORCE;
 		jumpSound.play();
+		timer.start();
 	
 	
 	motion = move_and_slide(motion, Vector2.UP);

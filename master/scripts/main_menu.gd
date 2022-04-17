@@ -4,6 +4,11 @@ onready var cont = $Panel/contButton
 onready var quit = $Panel/quitButton
 
 func _ready():
+	var fileCheck = File.new();
+	if not fileCheck.file_exists("res://master/save/save.json"):
+		Save._save();
+	fileCheck.close();
+	Save._load();
 	if Global.currentLevel == 1:
 		cont.disabled = true;
 	else: 
